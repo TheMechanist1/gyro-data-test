@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <script src="p5.js"></script>
+        <script src="sensorHandler.js"></script>
+        <script src="csvFile.js"></script>
+
+        <style>
+            body {
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            const csv = new csvFile(); 
+            
+            function setup() {
+                createCanvas(screen.availWidth, screen.availHeight);
+            }
+
+            function draw() {
+                background(0);
+
+                try {
+                    const table = csv.csvToArray();
+                    const sensors = new sensorHandler(table);
+                    sensors.handle()
+
+
+                } catch (e) {
+                    textSize(12);
+                    text(e.stack, 100, 100);
+                    fill(0, 102, 153);
+                }
+            }
+
+        </script>
+    </body>
+</html>
